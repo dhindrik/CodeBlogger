@@ -1,0 +1,26 @@
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Microsoft.AspNetCore.Components.WebView.Maui;assembly=Microsoft.AspNetCore.Components.WebView.Maui"
+             xmlns:local="clr-namespace:CodeBlogger"
+       xmlns:components="clr-namespace:CodeBlogger.Components.Pages;assembly=CodeBlogger.Components"
+             x:Class="CodeBlogger.MainPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <TabBar>
+<ShellContent Title="Editor">
+    <ContentPage Title="Editor">
+    <b:BlazorWebView HostPage="wwwroot/index.html">
+        <b:BlazorWebView.RootComponents>
+            <b:RootComponent Selector="#app" ComponentType="{x:Type components:Editor}" />
+        </b:BlazorWebView.RootComponents>
+    </b:BlazorWebView>
+        </ContentPage>
+    </ShellContent>
+        <ShellContent Title="Drafts">
+            <ContentPage>
+
+
+            </ContentPage>
+
+        </ShellContent>
+</TabBar>
+</Shell>

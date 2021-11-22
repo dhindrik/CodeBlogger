@@ -1,0 +1,112 @@
+﻿@inject IPostService PostService
+
+<style>
+    .monaco-editor {
+        height: 800px !important;
+    }
+
+    .column
+    {
+        width: 50%;
+        float:left;
+        padding: 20px;
+    }
+
+    .top
+    {
+        padding:20px;
+    }
+
+    button {
+        float:right;
+    }
+
+    input {
+        width: 90%;
+        float: left;
+    }
+</style>
+<div class="top">
+    <Microsoft.AspNetCore.Components.Forms.EditForm Model="@Post">
+        <input type="text" @bind-value="Post.Name" />
+        <button onclick="@(() => Save())">Save</button>
+    </Microsoft.AspNetCore.Components.Forms.EditForm>
+</div>
+<div class="column">
+    <MonacoEditor @ref="TextEditor"
+                  Id="Editor"
+                  ConstructionOptions="EditorConstructionOptions"
+                  OnKeyUp="KeyUp"/>
+/>
+</div>
+<div class="column">
+    @((MarkupString) Preview)
+</div>
+@code {
+
+    private Post Post { get; set; } = new Post();
+
+    private MonacoEditor? TextEditor { get; set; }
+    private string Content { get;set;} = string.Empty;
+    private string Preview { get; set; } = string.Empty;
+
+    private MarkdownContext markdownContext = new MarkdownContext();
+
+    private MarkdownPipeline? pipeline;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        if(PostService.IsFileTrackingSupported)
+        {
+            PostService.PostChanged += PostChanged;
+        }
+
+    }
+
+    private async void PostChanged(object? sender, FileChangedEventArgs eventArgs)
+    {
+        var filename = Path.GetFileName(eventArgs.FilePath);
+
+        if (TextEditor != null && Post.Name != null && PostService.FormatFileName(Post.Name) == filename)
+        {
+            var post = await PostService.GetDraft(eventArgs.FilePath);
+            await TextEditor.SetValue(post.Content);
+        }
+    }
+
+    private StandaloneEditorConstructionOptions EditorConstructionOptions(MonacoEditor editor)
+    {
+        return new StandaloneEditorConstructionOptions
+        {
+            AutomaticLayout = true,
+            Language = "markdown"
+        };
+
+    }
+
+    private async void KeyUp(KeyboardEvent keyboardEvent)
+    {
+        if (TextEditor == null)
+            return;
+
+        Content = await TextEditor.GetValue();
+
+        pipeline ??= new MarkdownPipelineBuilder()
+                 .UseAdvancedExtensions()
+                 .UseYamlFrontMatter()
+                 .UseDocfxExtensions(markdownContext)
+                 .Build();
+
+        Preview = Markdown.ToHtml(Content, pipeline);
+    }
+
+    private void Save()
+    {
+        Post.Content = Content;
+
+        PostService.SaveDraft(Post);
+    }
+    }
+
