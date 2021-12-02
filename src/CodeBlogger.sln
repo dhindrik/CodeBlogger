@@ -8,7 +8,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBlogger.Components", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBlogger.Web", "CodeBlogger.Web\CodeBlogger.Web.csproj", "{E3ACFF52-9275-40E6-B7BF-22A76FD584BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBlogger.WinForms", "CodeBlogger.WinForms\CodeBlogger.WinForms.csproj", "{F4F290C5-4655-49FE-ADBF-1112FD6E29B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBlogger.WinForms", "CodeBlogger.WinForms\CodeBlogger.WinForms.csproj", "{F4F290C5-4655-49FE-ADBF-1112FD6E29B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBlogger.Wpf", "CodeBlogger.Wpf\CodeBlogger.Wpf.csproj", "{DFE71042-B23D-45AE-A400-B44BFBF3B936}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{F4F290C5-4655-49FE-ADBF-1112FD6E29B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4F290C5-4655-49FE-ADBF-1112FD6E29B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4F290C5-4655-49FE-ADBF-1112FD6E29B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFE71042-B23D-45AE-A400-B44BFBF3B936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFE71042-B23D-45AE-A400-B44BFBF3B936}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFE71042-B23D-45AE-A400-B44BFBF3B936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFE71042-B23D-45AE-A400-B44BFBF3B936}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

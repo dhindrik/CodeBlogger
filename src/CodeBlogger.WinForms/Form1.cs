@@ -17,6 +17,8 @@ public partial class Form1 : Form
 
         services.AddSingleton<IPostService, PostService>();
 
+      
+
         var blazorWebView = new BlazorWebView()
         {
             Dock = DockStyle.Fill,

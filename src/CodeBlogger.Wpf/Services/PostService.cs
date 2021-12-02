@@ -1,7 +1,5 @@
-﻿using CodeBlogger.Components.Models;
-using CodeBlogger.Components.Services;
-
-namespace CodeBlogger.WinForms.Services;
+﻿
+namespace CodeBlogger.Wpf.Services;
 
 public class PostService : IPostService
 {
